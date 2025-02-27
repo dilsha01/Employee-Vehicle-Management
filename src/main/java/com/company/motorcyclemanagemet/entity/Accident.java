@@ -1,15 +1,19 @@
 package com.company.motorcyclemanagemet.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Accident {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accidentId;
+
     private String accidentDate;
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "motorcycleId")
+    private MotorCycle motorcycle;
+
+    // Getters and Setters
 }

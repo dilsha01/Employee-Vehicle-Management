@@ -1,15 +1,20 @@
 package com.company.motorcyclemanagemet.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.company.motorcyclemanagemet.entity.MotorCycle;
+import jakarta.persistence.*;
 
 @Entity
 public class License {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long licenseId;
-    private Double amount;
-}
 
+    private Double amount;
+
+    @ManyToOne
+    @JoinColumn(name = "motorcycleId")
+    private MotorCycle motorcycle;
+
+    // Getters and Setters
+
+}

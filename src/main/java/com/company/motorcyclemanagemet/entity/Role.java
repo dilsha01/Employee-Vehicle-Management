@@ -1,14 +1,19 @@
 package com.company.motorcyclemanagemet.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roleId;
-    private String role;
+
+    private String userRole;
+
+    @OneToMany(mappedBy = "role")
+    private Set<Employee> employees;
+
+    // Getters and Setters
 }
