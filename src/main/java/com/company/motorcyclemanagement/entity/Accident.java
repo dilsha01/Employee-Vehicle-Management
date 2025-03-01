@@ -24,8 +24,14 @@ public class Accident {
     private byte[] documents;
 
     @ManyToOne
+    @JoinColumn(name = "statusId", nullable = false)
+    private Status status;
+
+    @ManyToOne
     @JoinColumn(name = "notedBy", nullable = false)
     private OtherEmployee notedBy;
 
     private LocalDateTime notedDate;
+
+
 }

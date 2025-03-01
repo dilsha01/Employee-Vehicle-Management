@@ -20,6 +20,10 @@ public class MotorcycleAllowance {
     private Double amount;
 
     @ManyToOne
+    @JoinColumn(name = "statusId", nullable = false)
+    private Status status;
+
+    @ManyToOne
     @JoinColumn(name = "providedBy", nullable = false)
     private OtherEmployee providedBy;
 

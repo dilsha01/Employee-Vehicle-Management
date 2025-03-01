@@ -24,6 +24,10 @@ public class RunningChart {
     private LocalDateTime date; // Changed from String to LocalDateTime for better accuracy
 
     @ManyToOne
+    @JoinColumn(name = "statusId", nullable = false)
+    private Status status;
+
+    @ManyToOne
     @JoinColumn(name = "approvedBy", nullable = false)
     private OtherEmployee approvedBy;
 

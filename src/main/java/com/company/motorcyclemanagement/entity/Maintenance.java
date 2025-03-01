@@ -24,6 +24,10 @@ public class Maintenance {
     private byte[] documents; // To store PDF/JPEG files as BLOB
 
     @ManyToOne
+    @JoinColumn(name = "statusId", nullable = false)
+    private Status status;
+
+    @ManyToOne
     @JoinColumn(name = "approvedBy", nullable = false)
     private OtherEmployee approvedBy;
 

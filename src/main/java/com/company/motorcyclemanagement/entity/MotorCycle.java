@@ -23,6 +23,10 @@ public class MotorCycle {
     private String loanCompletionDate;
 
     @ManyToOne
+    @JoinColumn(name = "statusId", nullable = false)
+    private Status status;
+
+    @ManyToOne
     @JoinColumn(name = "enteredBy", nullable = false)
     private OtherEmployee enteredBy;
 
