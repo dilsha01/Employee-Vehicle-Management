@@ -28,4 +28,20 @@ public class MotorcycleAllowance {
     private OtherEmployee providedBy;
 
     private LocalDateTime providedDate;
+
+    // Getters
+    public Long getAllowanceId() { return allowanceId; }
+    public MotorCycle getMotorcycle() { return motorcycle; }
+    public Double getAmount() { return amount; }
+    public Status getStatus() { return status; }
+    public OtherEmployee getProvidedBy() { return providedBy; }
+    public LocalDateTime getProvidedDate() { return providedDate; }
+
+    // Setters
+    public void setAllowanceId(Long allowanceId) { this.allowanceId = allowanceId; }
+    public void setMotorcycle(MotorCycle motorcycle) { this.motorcycle = motorcycle; }
+    public void setAmount(Double amount) { this.amount = amount; }
+    public void setStatus(Status status) { this.status = status; }
+    public void setProvidedBy(OtherEmployee providedBy) { this.providedBy = providedBy; }
+    public void setProvidedDate(LocalDateTime providedDate) { this.providedDate = providedDate; }
 }
