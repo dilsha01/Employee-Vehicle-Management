@@ -32,4 +32,24 @@ public class Maintenance {
     private OtherEmployee approvedBy;
 
     private LocalDateTime approvedDate;
+
+    // Getters
+    public Long getMaintenanceId() { return maintenanceId; }
+    public MotorCycle getMotorcycle() { return motorcycle; }
+    public LocalDateTime getMaintenanceDate() { return maintenanceDate; }
+    public Double getAmount() { return amount; }
+    public byte[] getDocuments() { return documents; }
+    public Status getStatus() { return status; }
+    public OtherEmployee getApprovedBy() { return approvedBy; }
+    public LocalDateTime getApprovedDate() { return approvedDate; }
+
+    // Setters
+    public void setMaintenanceId(Long maintenanceId) { this.maintenanceId = maintenanceId; }
+    public void setMotorcycle(MotorCycle motorcycle) { this.motorcycle = motorcycle; }
+    public void setMaintenanceDate(LocalDateTime maintenanceDate) { this.maintenanceDate = maintenanceDate; }
+    public void setAmount(Double amount) { this.amount = amount; }
+    public void setDocuments(byte[] documents) { this.documents = documents; }
+    public void setStatus(Status status) { this.status = status; }
+    public void setApprovedBy(OtherEmployee approvedBy) { this.approvedBy = approvedBy; }
+    public void setApprovedDate(LocalDateTime approvedDate) { this.approvedDate = approvedDate; }
 }
