@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MotorcyclemanagemetApplication {
+public class MotorcyclemanagementApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MotorcyclemanagemetApplication.class, args);
+        SpringApplication.run(MotorcyclemanagementApplication.class, args);
     }
 
 }
