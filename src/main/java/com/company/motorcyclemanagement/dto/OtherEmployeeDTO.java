@@ -1,20 +1,15 @@
 package com.company.motorcyclemanagement.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import lombok.Getter;
-import lombok.Setter;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
 public class OtherEmployeeDTO {
     private Long otherEmployeeId;
     private String name;
     private String contactNo;
     private String email;
+    private String password;  // Added only if needed for user creation/update
     private Long roleId;
+    private Long branchId;
     private LocalDateTime enteredDate;
 
     // Getters and Setters
@@ -50,12 +45,28 @@ public class OtherEmployeeDTO {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Long getRoleId() {
         return roleId;
     }
 
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
+    }
+
+    public Long getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(Long branchId) {
+        this.branchId = branchId;
     }
 
     public LocalDateTime getEnteredDate() {
