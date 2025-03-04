@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/running-chart")
+@RequestMapping("api/running-chart")
 public class RunningChartController {
     @Autowired
     private RunningChartService runningChartService;

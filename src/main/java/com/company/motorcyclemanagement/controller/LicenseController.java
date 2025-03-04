@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/license")
+@RequestMapping("api/license")
 public class LicenseController {
     @Autowired
     private LicenseService licenseService;
