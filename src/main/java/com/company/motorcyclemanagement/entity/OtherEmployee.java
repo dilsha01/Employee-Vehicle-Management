@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.Set;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 @Entity
 @Getter
@@ -17,16 +19,27 @@ public class OtherEmployee {
     private String name;
     private String contactNo;
     private String email;
+    private String password;
 
     @ManyToOne
     @JoinColumn(name = "roleId", nullable = false)
     private Role role;
 
     @ManyToOne
+    @JoinColumn(name = "branchId", nullable = false)
+    private Branch branch; // Each employee has ONE branch
+
+    @ManyToOne
     @JoinColumn(name = "enteredBy", nullable = true)
     private OtherEmployee enteredBy;
 
     private LocalDateTime enteredDate;
+
+    private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    public void setPassword(String password) {
+        this.password = passwordEncoder.encode(password);
+    }
 
     @OneToMany(mappedBy = "enteredBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<OtherEmployee> enteredOtherEmployees;
@@ -97,4 +110,13 @@ public class OtherEmployee {
 
     public Set<RunningChart> getApprovedRunningCharts() { return approvedRunningCharts; }
     public void setApprovedRunningCharts(Set<RunningChart> approvedRunningCharts) { this.approvedRunningCharts = approvedRunningCharts; }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
+
 }
