@@ -10,7 +10,8 @@ import java.util.Set;
 @Setter
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false) // Ensures uniqueness at DB level
     private Long roleId;
 
     private String userRole;
