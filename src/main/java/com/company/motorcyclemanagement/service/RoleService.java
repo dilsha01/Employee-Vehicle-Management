@@ -5,6 +5,7 @@ import com.company.motorcyclemanagement.entity.Role;
 import com.company.motorcyclemanagement.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,7 +28,16 @@ public class RoleService {
                 .orElseThrow(() -> new RuntimeException("Role not found"));
     }
 
+//    public Role saveRole(Role role) {
+//        return roleRepository.save(role);
+//    }
+
     public Role saveRole(Role role) {
+        // Check if roleId already exists
+        Optional<Role> existingRole = roleRepository.findById(role.getRoleId());
+        if (existingRole.isPresent()) {
+            throw new IllegalArgumentException("Role ID already exists. Choose a unique ID.");
+        }
         return roleRepository.save(role);
     }
 
@@ -39,9 +49,7 @@ public class RoleService {
     }
 
     private RoleDTO convertToDTO(Role role) {
-        RoleDTO dto = new RoleDTO();
-        dto.setRoleId(role.getRoleId());
-        dto.setUserRole(role.getUserRole());
-        return dto;
+        return new RoleDTO(role.getRoleId(), role.getUserRole());
     }
+
 }
