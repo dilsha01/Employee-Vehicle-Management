@@ -4,6 +4,8 @@ import com.company.motorcyclemanagement.dto.RoleDTO;
 import com.company.motorcyclemanagement.entity.Role;
 import com.company.motorcyclemanagement.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,9 +27,16 @@ public class RoleController {
     }
 
     @PostMapping
-    public RoleDTO saveRole(@RequestBody Role role) {
-        return roleService.getRoleById(roleService.saveRole(role).getRoleId());
+    public ResponseEntity<RoleDTO> createRole(@RequestBody Role role) {
+        try {
+            Role savedRole = roleService.saveRole(role);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(new RoleDTO(savedRole.getRoleId(), savedRole.getUserRole()));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
     }
+
 
     @DeleteMapping("/{id}")
     public void deleteRole(@PathVariable Long id) {
