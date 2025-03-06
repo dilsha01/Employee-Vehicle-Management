@@ -27,6 +27,7 @@ public class SecurityConfig {
                         .requestMatchers("api/running-chart/**").permitAll() // Allow access
                         .requestMatchers("/api/statuses/**").permitAll() // Allow access
                         .requestMatchers("/api/roles/**").permitAll() // Allow access
+                        .requestMatchers("/api/auth/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin().disable()
