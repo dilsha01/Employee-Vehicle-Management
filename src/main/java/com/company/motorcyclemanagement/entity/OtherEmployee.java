@@ -119,4 +119,9 @@ public class OtherEmployee {
         this.branch = branch;
     }
 
+    public String getPassword() {
+        return this.password;
+    }
+
+
 }
