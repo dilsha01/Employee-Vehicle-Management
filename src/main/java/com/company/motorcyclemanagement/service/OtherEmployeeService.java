@@ -8,7 +8,7 @@ import com.company.motorcyclemanagement.repository.BranchRepository;
 import com.company.motorcyclemanagement.repository.OtherEmployeeRepository;
 import com.company.motorcyclemanagement.repository.RoleRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +21,9 @@ public class OtherEmployeeService {
     private final OtherEmployeeRepository otherEmployeeRepository;
     private final RoleRepository roleRepository;
     private final BranchRepository branchRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
+    @Autowired
     public OtherEmployeeService(OtherEmployeeRepository otherEmployeeRepository,
                                 RoleRepository roleRepository,
                                 BranchRepository branchRepository,
@@ -30,7 +31,7 @@ public class OtherEmployeeService {
         this.otherEmployeeRepository = otherEmployeeRepository;
         this.roleRepository = roleRepository;
         this.branchRepository = branchRepository;
-        this.passwordEncoder = (BCryptPasswordEncoder) passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<OtherEmployeeDTO> getAllOtherEmployees() {
@@ -48,10 +49,7 @@ public class OtherEmployeeService {
 
     public OtherEmployeeDTO createOtherEmployee(OtherEmployeeDTO otherEmployeeDTO) {
         OtherEmployee otherEmployee = convertToEntity(otherEmployeeDTO);
-
-        // Encrypt the password
         otherEmployee.setPassword(passwordEncoder.encode(otherEmployeeDTO.getPassword()));
-
         otherEmployee = otherEmployeeRepository.save(otherEmployee);
         return convertToDTO(otherEmployee);
     }
@@ -78,6 +76,34 @@ public class OtherEmployeeService {
             throw new EntityNotFoundException("OtherEmployee with ID " + id + " not found");
         }
         otherEmployeeRepository.deleteById(id);
+    }
+
+    // Authentication method
+    public boolean authenticate(String name, String password) {
+        Optional<OtherEmployee> optionalEmployee = otherEmployeeRepository.findByName(name);
+
+        if (optionalEmployee.isEmpty()) { // Correct way to check if Optional is empty
+            System.out.println("User not found: " + name);
+            return false;
+        }
+
+        OtherEmployee employee = optionalEmployee.get(); // Retrieve the actual object
+
+        System.out.println("Stored password (hashed): " + employee.getPassword());
+        System.out.println("Entered password (plain): " + password);
+
+        boolean match = passwordEncoder.matches(password, employee.getPassword());
+        System.out.println("Password Match: " + match);
+
+        return match;
+    }
+
+
+
+    public OtherEmployeeDTO getOtherEmployeeByEmail(String name) {
+        OtherEmployee employee = otherEmployeeRepository.findByName(name)
+                .orElseThrow(() -> new EntityNotFoundException("Employee with name " + name + " not found"));
+        return convertToDTO(employee);
     }
 
     private OtherEmployeeDTO convertToDTO(OtherEmployee otherEmployee) {
