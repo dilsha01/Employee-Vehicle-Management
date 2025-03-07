@@ -1,5 +1,8 @@
 package com.company.motorcyclemanagement.dto;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 
 public class OtherEmployeeDTO {
@@ -52,6 +55,7 @@ public class OtherEmployeeDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     public Long getRoleId() {
         return roleId;
