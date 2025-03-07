@@ -27,7 +27,7 @@ public class SecurityConfig {
                         .requestMatchers("api/running-chart/**").permitAll() // Allow access
                         .requestMatchers("/api/statuses/**").permitAll() // Allow access
                         .requestMatchers("/api/roles/**").permitAll() // Allow access
-                        .requestMatchers("/api/auth/login").permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin().disable()
@@ -38,4 +38,5 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
