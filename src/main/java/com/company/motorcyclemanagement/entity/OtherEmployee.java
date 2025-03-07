@@ -3,6 +3,8 @@ package com.company.motorcyclemanagement.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.FileDescriptor;
 import java.time.LocalDateTime;
 import java.util.Set;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,11 +37,12 @@ public class OtherEmployee {
 
     private LocalDateTime enteredDate;
 
-    private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+   // public static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public void setPassword(String password) {
-        this.password = passwordEncoder.encode(password);
-    }
+//    public void setPassword(String password) {
+//        this.password = passwordEncoder.encode(password);
+//        System.out.println("Password: " + this.password);
+//    }
 
     @OneToMany(mappedBy = "enteredBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<OtherEmployee> enteredOtherEmployees;
@@ -123,5 +126,7 @@ public class OtherEmployee {
         return this.password;
     }
 
-
+    public void setPassword(String password) {
+        this.password = password; // Password encoding is done in the service layer
+    }
 }
