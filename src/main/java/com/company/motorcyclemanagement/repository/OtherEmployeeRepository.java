@@ -6,5 +6,5 @@ import com.company.motorcyclemanagement.entity.OtherEmployee;
 import java.util.Optional;
 
 public interface OtherEmployeeRepository extends JpaRepository<OtherEmployee, Long> {
-        Optional<OtherEmployee> findByName(String name);
+        Optional<OtherEmployee> findByEmail(String email);
 }
