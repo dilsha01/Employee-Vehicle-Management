@@ -5,27 +5,37 @@ import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
 
+
 @Entity
 @Getter
 @Setter
+@Table(name = "bike_employee") // Ensure table name matches
 public class BikeEmployee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bike_employee_id") // Explicitly map the column name
     private Long bikeEmployeeId;
 
+    @Column(name = "name", nullable = true)
     private String name;
+
+    @Column(name = "contact_no", nullable = true)
     private String contactNo;
+
+    @Column(name = "email", nullable = true)
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "roleId", nullable = false)
+    @JoinColumn(name = "role_id", nullable = true) // Ensure correct foreign key name
     private Role role;
 
     @ManyToOne
-    @JoinColumn(name = "enteredBy", nullable = false)
+    @JoinColumn(name = "entered_by", nullable = true) // Ensure correct foreign key name
     private OtherEmployee enteredBy;
 
+    @Column(name = "entered_date", nullable = true)
     private LocalDateTime enteredDate;
+
 
 
     // Getters
