@@ -10,24 +10,25 @@ import java.time.LocalDateTime;
 @Setter
 public class Insurance {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremented ID
     private Long insuranceId;
 
     @ManyToOne
-    @JoinColumn(name = "motorcycleId", nullable = false)
+    @JoinColumn(name = "motorcycle_id", nullable = false) // Matches DB column
     private MotorCycle motorcycle;
 
     private Double amount;
 
     @Lob
-    private byte[] documents; // To store PDF/JPEG files as BLOB
+    @Basic(fetch = FetchType.LAZY , optional = true )
+    private byte[] documents; // To store PDFs/images
 
     @ManyToOne
-    @JoinColumn(name = "statusId", nullable = false)
+    @JoinColumn(name = "status_id", nullable = false) // Matches DB column
     private Status status;
 
     @ManyToOne
-    @JoinColumn(name = "approvedBy", nullable = false)
+    @JoinColumn(name = "approved_by", nullable = false) // Matches DB column
     private OtherEmployee approvedBy;
 
     private LocalDateTime approvedDate;
