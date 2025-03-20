@@ -24,6 +24,8 @@ public class OtherEmployeeController {
         return ResponseEntity.ok(otherEmployeeService.getOtherEmployeeById(id));
     }
 
+
+
     @PostMapping
     public ResponseEntity<OtherEmployeeDTO> createOtherEmployee(@RequestBody OtherEmployeeDTO otherEmployeeDTO) {
         return ResponseEntity.ok(otherEmployeeService.createOtherEmployee(otherEmployeeDTO));
