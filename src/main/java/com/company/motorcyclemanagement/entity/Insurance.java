@@ -19,9 +19,6 @@ public class Insurance {
 
     private Double amount;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY , optional = true )
-    private byte[] documents; // To store PDFs/images
 
     @ManyToOne
     @JoinColumn(name = "status_id", nullable = false) // Matches DB column
@@ -37,7 +34,7 @@ public class Insurance {
     public Long getInsuranceId() { return insuranceId; }
     public MotorCycle getMotorcycle() { return motorcycle; }
     public Double getAmount() { return amount; }
-    public byte[] getDocuments() { return documents; }
+
     public Status getStatus() { return status; }
     public OtherEmployee getApprovedBy() { return approvedBy; }
     public LocalDateTime getApprovedDate() { return approvedDate; }
@@ -46,7 +43,7 @@ public class Insurance {
     public void setInsuranceId(Long insuranceId) { this.insuranceId = insuranceId; }
     public void setMotorcycle(MotorCycle motorcycle) { this.motorcycle = motorcycle; }
     public void setAmount(Double amount) { this.amount = amount; }
-    public void setDocuments(byte[] documents) { this.documents = documents; }
+
     public void setStatus(Status status) { this.status = status; }
     public void setApprovedBy(OtherEmployee approvedBy) { this.approvedBy = approvedBy; }
     public void setApprovedDate(LocalDateTime approvedDate) { this.approvedDate = approvedDate; }

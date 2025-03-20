@@ -13,26 +13,29 @@ public class Accident {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accidentId;
 
-    @ManyToOne
-    @JoinColumn(name = "motorcycleId", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "motorcycle_id", nullable = true)
     private MotorCycle motorcycle;
 
+    @Column(nullable = true)
     private LocalDateTime accidentDate;
+
+    @Column(length = 1000)
     private String description;
 
-    @Lob
-    private byte[] documents;
+//    @Lob
+//    @Basic(fetch = FetchType.LAZY)
+//    private byte[] documents;
 
-    @ManyToOne
-    @JoinColumn(name = "statusId", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id", nullable = true)
     private Status status;
 
-    @ManyToOne
-    @JoinColumn(name = "notedBy", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "noted_by", nullable = true)
     private OtherEmployee notedBy;
 
     private LocalDateTime notedDate;
-
     // Getters
     public Long getAccidentId() {
         return accidentId;
@@ -50,9 +53,9 @@ public class Accident {
         return description;
     }
 
-    public byte[] getDocuments() {
-        return documents;
-    }
+//    public byte[] getDocuments() {
+//        return documents;
+//    }
 
     public Status getStatus() {
         return status;
@@ -83,9 +86,9 @@ public class Accident {
         this.description = description;
     }
 
-    public void setDocuments(byte[] documents) {
-        this.documents = documents;
-    }
+//    public void setDocuments(byte[] documents) {
+//        this.documents = documents;
+//    }
 
     public void setStatus(Status status) {
         this.status = status;

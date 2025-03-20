@@ -10,7 +10,7 @@ public class InsuranceDTO {
     private Long insuranceId;
     private Long motorcycleId;
     private Double amount;
-    private byte[] documents; // To store PDF/JPEG files as BLOB
+
     private Long statusId;
     private Long approvedById;
     private LocalDateTime approvedDate;
@@ -42,14 +42,7 @@ public class InsuranceDTO {
         this.amount = amount;
     }
 
-    // Getter and Setter for documents
-    public byte[] getDocuments() {
-        return documents;
-    }
 
-    public void setDocuments(byte[] documents) {
-        this.documents = documents;
-    }
 
     // Getter and Setter for statusId
     public Long getStatusId() {

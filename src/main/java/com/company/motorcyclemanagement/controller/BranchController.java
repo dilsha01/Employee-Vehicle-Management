@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/branches")
+@RequestMapping("/api/branches")
 public class BranchController {
     @Autowired
     private BranchService branchService;

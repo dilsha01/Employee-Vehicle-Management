@@ -72,7 +72,7 @@ public class InsuranceService {
 
         insurance.setMotorcycle(motorcycle);
         insurance.setAmount(insuranceDTO.getAmount());
-        insurance.setDocuments(insuranceDTO.getDocuments()); // Include documents
+
         insurance.setStatus(status);
         insurance.setApprovedBy(approvedBy);
         insurance.setApprovedDate(insuranceDTO.getApprovedDate());
@@ -93,7 +93,7 @@ public class InsuranceService {
         dto.setInsuranceId(insurance.getInsuranceId());
         dto.setMotorcycleId(insurance.getMotorcycle().getMotorcycleId());
         dto.setAmount(insurance.getAmount());
-        dto.setDocuments(insurance.getDocuments()); // Include documents
+
         dto.setStatusId(insurance.getStatus().getStatusId());
 
         dto.setApprovedDate(insurance.getApprovedDate());
@@ -105,7 +105,7 @@ public class InsuranceService {
         insurance.setInsuranceId(dto.getInsuranceId()); // Set ID if needed for updates
         insurance.setMotorcycle(motorcycle);
         insurance.setAmount(dto.getAmount());
-        insurance.setDocuments(dto.getDocuments()); // Include documents
+
         insurance.setStatus(status);
         insurance.setApprovedBy(approvedBy);
         insurance.setApprovedDate(dto.getApprovedDate());
