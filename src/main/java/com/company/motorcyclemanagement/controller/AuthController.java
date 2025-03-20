@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -26,16 +27,16 @@ public class AuthController {
     private OtherEmployeeService otherEmployeeService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Map<String, String> credentials) {
+    public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> credentials) {
         String email = credentials.get("email");
         String password = credentials.get("password");
 
         if (email == null || email.isEmpty()) {
-            return ResponseEntity.badRequest().body("Missing 'email' field");
+            return ResponseEntity.badRequest().body(Map.of("message", "Missing 'email' field"));
         }
 
         if (password == null || password.isEmpty()) {
-            return ResponseEntity.badRequest().body("Missing 'password' field");
+            return ResponseEntity.badRequest().body(Map.of("message", "Missing 'password' field"));
         }
 
         Optional<OtherEmployeeDTO> authenticatedEmployee = otherEmployeeService.authenticate(email, password);
@@ -44,21 +45,21 @@ public class AuthController {
             // Authentication successful
             OtherEmployeeDTO employeeDTO = authenticatedEmployee.get();
 
-            // Prepare headers with RoleId
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("RoleId", String.valueOf(employeeDTO.getRoleId())); // Add RoleId to header
+            // Prepare response body with RoleId
+            Map<String, Object> responseBody = new HashMap<>();
+            responseBody.put("message", "Login Successful");
+            responseBody.put("roleId", employeeDTO.getRoleId()); // Add RoleId to the response body
 
-            // Log the headers (for debugging purposes)
-            logger.info("RoleId added to response header: {}", headers.getFirst("RoleId"));
+            // Log the RoleId (for debugging purposes)
+            logger.info("RoleId added to response body: {}", employeeDTO.getRoleId());
 
-            // Return success response with headers
-            return ResponseEntity.ok()
-                    .headers(headers) // Set headers
-                    .body("Login Successful");
+            // Return success response with RoleId in body
+            return ResponseEntity.ok(responseBody);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Credentials");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Invalid Credentials"));
         }
     }
+
 
 
 
