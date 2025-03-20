@@ -52,6 +52,9 @@ public class OtherEmployeeService {
                 .orElseThrow(() -> new EntityNotFoundException("OtherEmployee with ID " + id + " not found"));
     }
 
+
+
+
     @Transactional
     public OtherEmployeeDTO createOtherEmployee(OtherEmployeeDTO otherEmployeeDTO) {
         if (otherEmployeeDTO == null) {
@@ -95,18 +98,23 @@ public class OtherEmployeeService {
         otherEmployeeRepository.deleteById(id);
     }
 
-    public boolean authenticate(String email, String password) {
+    public Optional<OtherEmployeeDTO> authenticate(String email, String password) {
         return otherEmployeeRepository.findByEmail(email)
-                .map(employee -> {
+                .filter(employee -> {
                     boolean match = passwordEncoder.matches(password, employee.getPassword());
                     logger.info("Authentication attempt for email: {} - Success: {}", email, match);
-                    return match;
+                    return match;  // Only if the password matches
                 })
-                .orElseGet(() -> {
-                    logger.warn("Authentication failed: User not found with email: {}", email);
-                    return false;
+                .map(this::convertToDTO) // Convert to DTO (which includes roleId)
+                .map(dto -> {
+                    // You can perform any additional logic here if needed
+                    logger.info("RoleId for authenticated user: {}", dto.getRoleId());
+                    return dto;
                 });
     }
+
+
+
 
     public OtherEmployeeDTO getOtherEmployeeByEmail(String email) {
         return otherEmployeeRepository.findByEmail(email)
